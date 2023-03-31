@@ -1,0 +1,18 @@
+filebeat.modules:
+
+#-------------------------------- Apache Module --------------------------------
+  module: apache
+
+  access:
+    enabled: true
+    var.paths: ["/path/to/log/apache/access.log*"]
+
+
+  error:
+    enabled: true
+    var.paths: ["/path/to/log/apache/error.log*"]
+
+  output.elasticsearch:
+    hosts: ["elasticsearch:9200"]
+    indices:
+      - index: "filebeat-%{[agent.version]}-%{+yyyy.MM.dd}"
